@@ -1,7 +1,7 @@
 <?php
 // $GLOBALS
-$base_path = '/var/www/html';
-$img_path = "/php/code/php/raspicam/photos/";
+$base_path = $_SERVER['DOCUMENT_ROOT'];
+$img_path = dirname($_SERVER['SCRIPT_NAME']) . '/photos/';
 $cur_img = $img_path . 'default.jpg';
 $dashboard = NULL;
 
@@ -181,7 +181,7 @@ function take_pic(){
     $cmd = '/usr/bin/raspistill -t 1 -v ' . ' -o ' . $GLOBALS['base_path'] . $GLOBALS['img_path'] . $filename;
   }
   exec($cmd, $output, $return_var);
-  if($return_var == 0){// && (file_exists($base_path . $img_path . $filename))){
+  if($return_var == 0){// && (file_exists(__DIR__ . $GLOBALS['img_path'] . $filename))){
     $GLOBALS['cur_img'] = $GLOBALS['img_path'] . $filename;
   }
 }
